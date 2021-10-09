@@ -17,7 +17,10 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
-      location: {
+      locationY: {
+        type: Sequelize.STRING
+      },
+      locationX: {
         type: Sequelize.STRING
       },
       img_url: {

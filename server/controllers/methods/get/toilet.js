@@ -1,6 +1,7 @@
-const models = require('../../../models');
+const XLSX = require("xlsx");
 
 module.exports = async (req, res) => {
-  await models.toilet.findAll()
-  .then(data => res.status(200).json(data))
+  let exel = XLSX.readFile(__dirname + "/../../../sample_data/toilets_seoul.xlsx")
+  let data = exel.Sheets["Sheet0"]
+  res.status(200).send(data)
 }
