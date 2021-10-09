@@ -21,7 +21,6 @@ app.use(
   })
 );
 
-
 app.post("/login", controllers.post_login);
 app.post("/signup", controllers.post_signup);
 app.post("/signout", controllers.post_signout);
