@@ -14,6 +14,7 @@
 //2 마크다운을 찍어준다 .
 //3. 끝 
 //4. 이미찍혀있는걸 id  -> set 에넣기
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './location.css'
 const Location=()=>{
@@ -56,11 +57,18 @@ const Location=()=>{
             // 마커와 인포윈도우를 표시합니다
             console.log('locPosition',locPosition)
             displayMarker(locPosition, message);
+            ////
             /////
             /////바운드를이용한 마커찍기
            let bounds = map.getBounds()
                 console.log('범위는???',bounds)
-        
+            axios
+            .get(
+            'https://localhost:4000/toilet'
+             ).then((res)=>{
+                 console.log(res)
+             })
+         
           });
         
         

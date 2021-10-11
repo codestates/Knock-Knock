@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "gksksla1",
+    "password": "3532",
     "database": "Knock-Knock",
     "host": "127.0.0.1",
     "dialect": "mysql"
