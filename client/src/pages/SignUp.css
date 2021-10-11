@@ -1,0 +1,28 @@
+.signupform{
+    border: 1px solid red;
+    margin-top: 1%;
+    height: 150%;
+    margin: 1%;
+    
+}
+.email{
+    margin-top: 5%;
+    border: 1px solid red;
+}
+
+.password{
+    margin-top: 2%;
+    border: 1px solid red;
+}
+.confirmpassword{
+    margin-top: 2%;
+    border: 1px solid red;
+}
+.username{
+    margin-top: 2%;
+    border: 1px solid red;
+}
+.sign-up.button{
+    margin-top: 10%;
+    border: 1px solid red;
+}
