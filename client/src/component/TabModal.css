@@ -1,0 +1,40 @@
+.ModalContainer {
+    border: 1px solid red;
+    height: 30%;
+    width: 10%;
+    z-index: 5;
+}
+.ModalContainer1 {
+    border: 1px solid red;
+    height: 30%;
+    width: 10%;
+    z-index: 5;
+}
+.ModalContainer2 {
+    border: 1px solid red;
+    height: 50px;
+    width: 10%;
+    float: left;
+    position: absolute;
+    top: 10%;
+    right: 0%;
+    z-index: 5;
+    background-color: green;
+}
+.tablist{
+    border: 1px solid red;
+    text-align: center;
+    height: 50%;
+    width: 100%;
+    z-index: 5;
+}
+
+.ModalContaine1{
+    border: 1px solid red;
+    float: left;
+    z-index: 5;
+}
+.headerdiv{
+    margin: 1%;
+    z-index: 5;
+}
