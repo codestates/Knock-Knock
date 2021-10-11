@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// import Modal from "react-modal";
+import React, { useState } from 'react';
+import LogIn from "./pages/LogIn";
+import MyPage from "./pages/MyPage";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import "./App.css"
+import "./pages/LogIn.css"
+import "./pages/MyPage.css"
 
-function App() {
+export default function App() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  <BrowserRouter>
+    <div className = 'container'>
+      <button className = "btn_modal" onClick={openModal}>
+        {isModalOpen === false ? "Open Modal" : "Modal"}
+      </button>
+      {isModalOpen === false ? null : 
+      <LogIn openModal={ openModal } />
+      }
     </div>
+    <Switch>
+      <Route path="/mypage">
+        <MyPage></MyPage>        
+      </Route>
+    </Switch>
+  </BrowserRouter>
   );
 }
 
-export default App;
+

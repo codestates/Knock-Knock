@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+.centerBox {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    
+}
+
+.h1 {
+    height: 20%;
+    margin: 0 auto;
+}
+
+.modifyUserInfo {
+    height: 10%;
+}
+
+.myList {
+    height: 10%;
+}
+
+.btn_container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.btn_logout {
+    width:100px;
+    height:30px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left: -50px;
+    margin-top: -15px;
+
+}
