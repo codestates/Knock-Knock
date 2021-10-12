@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
       res.status(409).send("This email already exists")
     }else{
       const payload = {
+        id : data.dataValues.id,
         name: data.dataValues.name,
         email: data.dataValues.email,
         password: data.dataValues.password
@@ -43,6 +44,7 @@ module.exports = async (req, res) => {
       res.status(201).json({
           data : { 
             accessToken: accessToken,
+            id : data.dataValues.id,
             name: data.dataValues.name,
             email: data.dataValues.email,
             password: data.dataValues.password
