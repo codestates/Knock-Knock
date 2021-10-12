@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   if(!name || !email || !password ) {
     res.status(422).send("insufficient parameters supplied")
   }
-
+else{
 
   await db.user.findOrCreate({
     where: {
@@ -51,5 +51,5 @@ module.exports = async (req, res) => {
         })
     }
   })
-
+}
 }

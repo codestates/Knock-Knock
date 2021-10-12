@@ -38,7 +38,7 @@ function App() {
       <Link to="/">
         <h1 className="App-name" ><img src="https://discord.com/channels/@me/895109459104374804/896970244885737533" alt="My Image"/></h1>
         </Link>
-          <Tabmodal/>
+          <Tabmodal2/>
        </header>
     </div>
     <Switch>
@@ -49,9 +49,7 @@ function App() {
       <Route  exact path='/' component={Location}/>
       <Route  path='/signup' component={SignUp}/>
       <Route  path='/login' component={LogIn} openModal={openModal}/>
-
       <Route  path='/toilet' component={AddToilet}/>
-
       <Route  path='/MyPage' component={MyPage}/>
 
     </div>
