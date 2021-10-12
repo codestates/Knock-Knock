@@ -50,8 +50,6 @@ module.exports = async (req, res) => {
       }
     })
   }
-=======
-  }
 
 
   await db.user.findOrCreate({
