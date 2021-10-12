@@ -11,7 +11,7 @@ module.exports = {
     let datas = [];
 
     //17번 시트까지 있음. 9번 시트가 200개 정도로 가장 작음. 테스트 용도로 사용하기 좋음.
-    for(let j = 0; j < 17; j++) {
+    for(let j = 9; j < 10; j++) {
       //불러온 엑셀의 시트 이름 검색
       let data = exel.Sheets[`Sheet${j}`]
       //데이터의 가장 마지막 줄 찾기
