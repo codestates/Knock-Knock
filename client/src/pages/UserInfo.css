@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .userInfo_modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);  
+    z-index: 1050;
+  }
+  
+  .userInfo_modal_2 {
+      width: 480px;
+      height: 621px;
+      background-color: white;
+      position: relative;
+      box-sizing: border-box;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff; 
+    }
+  
+  .close {
+    float: right;
+    font-size: 25px;
+    color: black;
+    cursor: pointer
+  }
+  
+  .userInfo_modal_3 {
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  .myInfo_text {
+      border-bottom: 5px solid #ff5370;
+      font-family: "SBAggroB";
+      padding-bottom: 15px;
+  }
+  
+  .userName_text {
+  
+    margin-top: 50px;
+  
+  }
+  
+  .userEmail_text {
+  
+    margin-top: 30px;
+  
+  }
+  
+  .userPassword_text {
+  
+    margin-top: 30px;
+      
+  }
+  
+  .logo {
+     margin: 0 auto;
+     margin-top: 70px;
+     width: 250px;
+     height: 250px;
+  }
