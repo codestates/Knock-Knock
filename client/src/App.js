@@ -4,8 +4,7 @@ import LogIn from "./pages/LogIn";
 import MyPage from "./pages/MyPage";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import "./App.css"
-import "./pages/LogIn.css"
-import "./pages/MyPage.css"
+
 
 export default function App() {
 
