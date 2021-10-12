@@ -49,7 +49,11 @@ function App() {
       <Route  exact path='/' component={Location}/>
       <Route  path='/signup' component={SignUp}/>
       <Route  path='/login' component={LogIn} openModal={openModal}/>
+
       <Route  path='/toilet' component={AddToilet}/>
+
+      <Route  path='/MyPage' component={MyPage}/>
+
     </div>
     </Switch>
   </div>  

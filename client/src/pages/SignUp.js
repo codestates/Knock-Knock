@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from 'react';
 export default function SignUp(){
  const [userinfo, setuserinfo] = useState({
+        
         email: '',
         password: '',
         confirmpassword: '',
@@ -16,24 +17,29 @@ export default function SignUp(){
   };
 
 console.log(userinfo)
- const ValidSignup = () =>{ //여기서 콜백 넘기는이유가
+ const validSignup = () =>{ //여기서 콜백 넘기는이유가
     if(userinfo.email ==='' || userinfo.password ==='' || userinfo.username ==='' || userinfo.confirmpassword ==='' ){
         setErrorMessage('모든 항목은 필수입니다')
+        console('첫번째 if문')
       }
       else if(userinfo.password !== userinfo.confirmpassword) {
         setErrorMessage('비밀번호가 일치하지 않습니다') 
+        console('두번째 if문')
       }
+      
       else{
         axios
         .post(
           'https://localhost:4000/signup',{
-            email:userinfo.email, password:userinfo.password, username:userinfo.username
-          },
+            name:userinfo.username, email:userinfo.email, password:userinfo.password
+          }
+         ,
           {
             headers: {
                 "Content-Type": "application/json"
         }
-        }).then((res)=>{
+        }
+        ).then((res)=>{
                console.log(res)
          // settoiletinfo(toiletinfo)     
            })
@@ -80,7 +86,7 @@ console.log(userinfo)
                 placeholder="닉네임"
                 onChange={handleInputValue("username")}
               />
-              <button className="loginBtn" onclick={ValidSignup}>
+              <button className="loginBtn" onClick={validSignup}>
                 {" "}
                 회원가입{" "}
               </button>
