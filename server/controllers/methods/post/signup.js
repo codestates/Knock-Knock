@@ -1,3 +1,4 @@
-module.exports = (req, res) => {
-  res.send("hello World")
+
+module.exports = async (req, res) => {
+  res.send("hello")
 }
