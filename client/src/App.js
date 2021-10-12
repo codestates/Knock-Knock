@@ -6,8 +6,10 @@ import SignUp from './pages/SignUp'
 import LogIn from './pages/LogIn'
 import MyPage from './pages/MyPage'
 import Location from './component/location'
+import AddToilet from './pages/addToilet'
 import {BrowserRouter, Route, Switch,useHistory, Link} from "react-router-dom"
-import * as React from 'react';
+// import * as React from 'react';
+import React, { useState } from 'react';
 //import {FaRestroom} from "react-icons/fa"
 function App() {
   //템메뉴
@@ -21,6 +23,12 @@ function App() {
   React.useEffect(() => {
       history.push('/'); // 마운트 될 때 
   }, [])
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
 
   return (
     
@@ -40,8 +48,8 @@ function App() {
      {/* <Location/> */}
       <Route  exact path='/' component={Location}/>
       <Route  path='/signup' component={SignUp}/>
-      <Route  path='/login' component={LogIn}/>
-      <Route  path='/MyPage' component={MyPage}/>
+      <Route  path='/login' component={LogIn} openModal={openModal}/>
+      <Route  path='/toilet' component={AddToilet}/>
     </div>
     </Switch>
   </div>  

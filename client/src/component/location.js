@@ -1,3 +1,4 @@
+
 /*global kakao*/ 
 //위주석은 지우지마세요!!!
 //화장실위치를 찾아주는건데 ...
@@ -17,6 +18,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './location.css'
+import { Link } from "react-router-dom";
 const Location=()=>{
     const [searchAdress, setsearchAdress] = useState({
         adress : ''
@@ -162,7 +164,10 @@ const Location=()=>{
              </div>
              <div className='backCurLoc'>
              <button onClick={resetSearch}>현재위치</button>    
-             </div>    
+             </div>      
+             <Link to="/toilet">
+             <span >화장실추222222222가</span> 
+             </Link>
         	<div className='map' id="map" style={{ width:"100%", height:"100%",position: "sticky"}}></div> 
         </div>
     )
