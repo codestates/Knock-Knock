@@ -10,6 +10,8 @@ axios.defaults.withCredentials = true;
 
 export default function MyPage ({ handleLogout, userinfo, handleWriteInfo }) {
 
+    console.log("=================================userinfo: ", userinfo)
+
     const [myInfo, setMyInfo] = useState(false);
 
     const handleUserInfo = () => {

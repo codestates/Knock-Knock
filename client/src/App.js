@@ -9,7 +9,7 @@ import MyPage from './pages/MyPage'
 import MyList from './pages/MyList'
 import Location from './component/location'
 import AddToilet from './pages/addToilet'
-import {BrowserRouter, Route, Switch,useHistory, Link} from "react-router-dom"
+import {BrowserRouter, Route, Switch, useHistory, Link} from "react-router-dom"
 // import * as React from 'react';
 import React, { useState } from 'react';
 //import {FaRestroom} from "react-icons/fa"
@@ -25,14 +25,16 @@ function App() {
 
   const [accessToken, setAccessToken] = useState(null);
 
-  const handleAccessToken = (res) => {
-    setAccessToken(res) // 로그인하면서 받은 엑세스 토큰
+  console.log("========================useinfostates: ", userinfo)
+
+  const handleAccessToken = (accessT) => {
+    setAccessToken(accessT) // 로그인하면서 받은 엑세스 토큰
   }
 
   const handleWriteInfo = () => {
     axios.get("https://localhost:4000/user/mylist", {
       headers: {
-        authorization: `Bearer ${accessToken}`,
+        authorization: `${accessToken}`,
         "Content-Type" : "application/json"
       }
     }) // myComment, myToilet 데이터 요청
@@ -45,17 +47,16 @@ function App() {
   const isAuthenticated = () => {
     axios.get("https://localhost:4000/user/userinfo", {
       headers: {
-        authorization: `Bearer ${accessToken}`,
+        authorization: `${accessToken}`,
         "Content-Type" : "application/json"   
       },
       withCredentials: true
     })
     .then((res) => {
-      console.log("===========================res: ", res)
       setIsLogin(true);
-      setUserinfo(res); // 객체 키값이 없기에 그냥 바로 res 객체
+      setUserinfo(res.data); // 객체 키값이 없기에 그냥 바로 res 객체
       openModalFunc();
-      alert("나로그인됨!!!!!!!!!!!!!!!!!!!!")
+      alert("로그인이 완료되었습니다")
       history.push('/')
       
     })
@@ -122,9 +123,24 @@ function App() {
     </div>
     <Switch>
     <div className='map'>
-       <Location openModalFunc3={openModalFunc3}/>
-      <Route  path='/mypage' component={MyPage} handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
-      <Route  path='/mylist' component={MyList}  writeMyComment={writeMyComment} writeMyToilet={writeMyToilet}/>
+    <Location openModalFunc3={openModalFunc3}/>
+
+       
+  
+
+    
+     {/* <SignUp/>  */}
+     {/* <Location/> */}
+
+    
+     <Route path='/mypage' handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} >
+       <MyPage />
+     </Route>
+     <Route path='/mylist' writeMyComment={writeMyComment} writeMyToilet={writeMyToilet}>
+       <MyList />
+     </Route>
+    
+
     </div>
     </Switch>
   </div>  

@@ -2,7 +2,7 @@ import './SignUp.css'
 import axios from "axios";
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
-export default function SignUp(){
+export default function SignUp({openModalFunc2}){
     const history = useHistory();
  const [userinfo, setuserinfo] = useState({
         
@@ -58,7 +58,7 @@ console.log(userinfo)
         <div className="modal" >
         <div >
           <div className="loginModal">
-            <span className="close" >
+            <span className="close" onClick={openModalFunc2}>
               &times;
             </span>
             <div className="modalContents">
