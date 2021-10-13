@@ -2,31 +2,49 @@ require("dotenv").config();
 const db = require('../../../models');
 const jwt = require('jsonwebtoken');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   const authorization = req.headers['authorization'];
 
-  if(!authorization) {
-    res.status(400).json({ message:" 너 엑세스토큰 없는데 ? 혹은 만료된듯 ??"})
-  } else {
-    const token = authorization.split(' ')[1];
-    const data = jwt.sign(token, process.env.ACCESS_SECRET, { expiresIn: "15m"});
+  jwt.verify(authorization,process.env.ACCESS_SECRET , async function(err,decoded){
+    if(err) {
+      res.send("만료됬거나 유효하지 않은 토큰 입니다")
+    } else {
+      const tokenData = { 
+        id: decoded.id,
+        email:decoded.email,
+        name:decoded.name,
+        password:decoded.password
+      }
 
-    console.log("token")
+      const userInfo = await db.user.findOne({
+        where: tokenData
+      })
 
-    const userInfo = {
-      id: data.id,
-      userId: data.userId,
-      email: data.email,
-      createdAt: data.createdAt,
-      updatedAt: data.updatedAt
+      if(!userInfo) {
+        res.send("잘못된 정보 토큰 입니다")
+      } else {
+        const payload = {
+          name : userInfo.dataValues.name,
+          email : userInfo.dataValues.email,
+          password : userInfo.dataValues.password
+        }
+        
+        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: "15m"})
+        const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, { expiresIn: "1h"})
+    
+        res.cookie("refreshToken", refreshToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none"
+        })
+    
+        res.status(200).json({
+          accessToken: accessToken,
+          name : userInfo.dataValues.name,
+          email : userInfo.dataValues.email,
+          password : userInfo.dataValues.password
+        })
+      }
     }
-
-    res.status(200).json({
-      data: {
-        accessToken: accessToken,
-        userInfo: userInfo
-      },
-      message: "ok"
-    })
-  }
+  })
 };

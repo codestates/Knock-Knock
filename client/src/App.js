@@ -8,6 +8,7 @@ import LogIn from './pages/LogIn'
 import MyPage from './pages/MyPage'
 import MyList from './pages/MyList'
 import Location from './component/location'
+import AddToilet from './pages/addToilet'
 import {BrowserRouter, Route, Switch,useHistory, Link} from "react-router-dom"
 // import * as React from 'react';
 import React, { useState } from 'react';
@@ -86,6 +87,7 @@ function App() {
       <Route  path='/login' component={LogIn} handleResponseSuccess={handleResponseSuccess} openModal={openModal} />
       <Route  path='/mypage' component={MyPage} handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
       <Route  path='/mylist' component={MyList}  writeInfo={writeInfo}/>
+      <Route  path='/toilet' component={AddToilet}/>
     </div>
     </Switch>
   </div>  
