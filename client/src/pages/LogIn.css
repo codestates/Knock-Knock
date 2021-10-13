@@ -42,6 +42,9 @@
    margin: 0 auto;
    width: 160px;
    height: 150px;
+   margin-bottom: 20px;
+   padding-bottom: 0;
+   border-bottom:3px solid #ff5370;
  }
 
 
@@ -95,7 +98,7 @@
         border-style: none;
       }
 
-      .socialBox {
+      /* .socialBox {
         margin-bottom: 30px;
       }
         .kakao {
@@ -148,7 +151,7 @@
             padding-top: 7px;
             width: 25px;
             height: 25px;
-          }
+          } */
 
 
       .loginEnd {
