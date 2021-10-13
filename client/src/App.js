@@ -53,11 +53,13 @@ function App() {
       }
     }) // myComment, myToilet 데이터 요청
     .then((res) => {
+
       console.log("===================mylist: ", res)
 
       setIsMyList(res.data)
 
       console.log("===============isMyList: ", isMyList)
+
     })
   }
 
@@ -138,7 +140,7 @@ function App() {
 
         {isLogin ===false ? 
         <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/> :
-         <Tabmodal2/>}
+         <Tabmodal2 handleLogout={handleLogout}/>}
          {/* <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/> */}
 
        </header>
@@ -159,16 +161,16 @@ function App() {
 
      {/* <Location openModalFunc3={openModalFunc3}/> */}
      {/* <SignUp/>  */}
-     {/* <Location/> */}
-     <Route path='/mypage'  >
+     {/* {<Location/>} */}
+     <Route exact path='/'  >
+       <Location openModalFunc3={openModalFunc3}/>
+     </Route> 
+     <Route exact path='/mypage'  >
        <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
      </Route>
-     <Route path='/mylist' >
-       <MyList writeMyComment={writeMyComment} accessToken={accessToken} />
+     <Route exact path='/mylist' >
+       <MyList accessToken={accessToken} />
      </Route>
-    
-
-
      <Route path='/mylist'>
        <MyList isMyList={isMyList} />
      </Route>
