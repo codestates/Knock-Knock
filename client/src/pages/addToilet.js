@@ -21,17 +21,23 @@ export default function AddToilet({ openModal }) {
        // setErrorMessage('모든 항목은 필수입니다')
           }
          else{
-            axios
-            .post(
-              'https://localhost:4000/toilet',{
-                name:toiletinfo.name,
-                 address:toiletinfo.address
-              },
-              {
-                headers: {
-                    authorization:`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic…DM0fQ.GandDwD2fbIuPdAYxt0Qqt0Ogsn6G2wz1uBJvtDSzas`
-            }
-            }).then((res)=>{
+         const reqHeaders = {
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic…Q0MX0.IpW8r0VxgI0BI6isUId3b9WrCY5GxcAo3Z-GMOxNiTE', 
+            'Content-Type': 'application/json'
+         }
+
+          
+          var config = {
+            method: 'post',
+            url: 'https://localhost:4000/toilet',
+            headers: { 
+              'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic…Q0MX0.IpW8r0VxgI0BI6isUId3b9WrCY5GxcAo3Z-GMOxNiTE', 
+              'Content-Type': 'application/json'
+            },
+            data : {name : toiletinfo.name, adress: toiletinfo.adress}
+          };
+          
+          axios(config).then((res)=>{
                    console.log('res는!!!!!',res)
              // settoiletinfo(toiletinfo)     
                })
