@@ -10,7 +10,7 @@ const controllers = require("./controllers")
 
 const app = express();
 app.use(express.json());
-const HTTPS_PORT = 4000;
+const port = 443;
 
 
 app.use(
@@ -39,18 +39,6 @@ app.delete("/user/toilet", controllers.delete_toilet);
 app.delete("/user/comment", controllers.delete_comment);
 
 
-let server;
-if(fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")){
-
-  const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
-  const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
-  const credentials = { key: privateKey, cert: certificate };
-
-  server = https.createServer(credentials, app);
-  server.listen(HTTPS_PORT, () => console.log("Port : 4000, server runnning"));
-
-} else {
-  server = app.listen(HTTPS_PORT)
-}
-
-module.exports = server;
+app.listen(port, () => {
+  console.log(`서버가 ${port}번에서 작동중입니다.`);
+})
