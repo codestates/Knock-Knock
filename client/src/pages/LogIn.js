@@ -23,7 +23,7 @@ export default function LogIn({ handleResponseSuccess, openModal }) {
             alert("이메일과 비밀번호를 모두 입력하세요")
         }
         else {
-            axios.post("https://localhost:3000/login",
+            axios.post("https://localhost:4000/login",
             {email, password},
             {withCredentials: true}
             )
@@ -68,15 +68,6 @@ export default function LogIn({ handleResponseSuccess, openModal }) {
                     {" "}
                     로그인{" "}
                   </button>
-                  <div className="socialBox">
-                    <div className="kakao">
-                      <div className="kakaoText">카카오 계정으로 신규가입</div>
-                    </div>
-                    <div className="google">
-                      {/* <image className="googleLogo" src="https://i.ibb.co/0t5J8cr/free-icon-google-plus-1051284.png"/> */}
-                      <div className="googleText">구글 계정으로 신규가입</div>
-                    </div>
-                  </div>
                   <div className="loginEnd">
                     <div className="loginLine">
                      <Link to="/signup">회원이 아니신가요?</Link> 
@@ -85,7 +76,6 @@ export default function LogIn({ handleResponseSuccess, openModal }) {
                 </div>
                 <div className="logo_box">
                 </div>
-                
               </div>
             </div>
           </div>
