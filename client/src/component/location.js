@@ -69,9 +69,11 @@ const Location=()=>{
              axios
              .get(
              'https://localhost:4000/toilet', {
-                 params:{
-                     boundaryX: `${latlng.ha}-${latlng.oa}`,
-                     boundaryY: `${latlng.qa}-${latlng.pa}`,
+                params:{
+                    boundaryX: `${latlng.ha}-${latlng.oa}`,
+                    boundaryY: `${latlng.qa}-${latlng.pa}`,
+                     
+                    
                  }, 
             }).then((res)=>{
                   console.log(res)
