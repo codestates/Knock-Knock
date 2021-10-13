@@ -54,7 +54,7 @@ function App() {
     })
     .then((res) => {
       setIsLogin(true);
-      setUserinfo(res.data); // 객체 키값이 없기에 그냥 바로 res 객체
+      setUserinfo(res.data); // res.data 안에 엑세스토큰과 userinfo 존재
       openModalFunc();
       alert("로그인이 완료되었습니다")
       history.push('/')
