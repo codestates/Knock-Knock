@@ -44,6 +44,7 @@ function App() {
       }
     }) // myComment, myToilet 데이터 요청
     .then((res) => {
+      console.log(res)
       setWriteMyComment(res.myComment)
       setWriteMyToilet(res.myToilet)
     })
@@ -133,8 +134,11 @@ function App() {
     <div className='map'>
      {/* <Location openModalFunc3={openModalFunc3}/> */}
      {/* <SignUp/>  */}
-     {/* <Location/> */}
-     <Route path='/mypage'  >
+     {/* {<Location/>} */}
+     <Route path='/'  >
+       <Location openModalFunc3={openModalFunc3}/>
+     </Route> 
+     <Route exact path='/mypage'  >
        <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
      </Route>
      <Route path='/mylist' >
