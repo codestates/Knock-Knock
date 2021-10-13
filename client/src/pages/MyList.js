@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import "./MyList.css"
 
-const MyList = ({writeInfo}) => {
+const MyList = ( {writeInfo} ) => {
 
     
 
