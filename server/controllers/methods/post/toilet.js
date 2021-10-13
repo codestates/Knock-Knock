@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
   const authorization = req.headers['authorization'];
   jwt.verify(authorization,process.env.ACCESS_SECRET , async function(err,decoded){
     //받아온 엑세스 토큰이 없거나 만료되었으면
+    console.log(decoded)
     if(err) res.send("만료 또는 유효하지 않음")
     
     else {

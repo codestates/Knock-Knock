@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
         res.send("잘못된 정보 토큰 입니다")
       } else {
         const payload = {
+          id : userInfo.dataValues.id,
           name : userInfo.dataValues.name,
           email : userInfo.dataValues.email,
           password : userInfo.dataValues.password
