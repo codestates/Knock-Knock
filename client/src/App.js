@@ -1,3 +1,4 @@
+//import logo from './logo.svg';
 import axios from "axios"
 import './App.css';
 import Tabmodal from './component/TabModal'
@@ -35,13 +36,17 @@ function App() {
 
 
   const handleAccessToken = (accessT) => {
-  
+    console.log('accccccceessstyttttttttt',accessT)
     setAccessToken(accessT) // 로그인하면서 받은 엑세스 토큰
+
+
+
+    
 
   }
   
-  const handleWriteInfo = () => {
-    axios.get("http://ec2-54-180-141-64.ap-northeast-2.compute.amazonaws.com/user/mylist", {
+  const handleWriteInfo = (accessT) => {
+    axios.get("https://localhost:4000/user/mylist", {
       headers: {
         authorization: `${accessToken}`,
         "Content-Type" : "application/json"
@@ -60,7 +65,7 @@ function App() {
   
 
 
-    axios.get("http://ec2-54-180-141-64.ap-northeast-2.compute.amazonaws.com/user/userinfo", {
+    axios.get("https://localhost:4000/user/userinfo", {
 
       headers: {
         authorization: `${accessToken}`,
@@ -69,15 +74,19 @@ function App() {
       withCredentials: true
     })
     .then((res) => {
+  
 
+      console.log('22222222222222',res)
+       // 객체 키값이 없기에 그냥 바로 res 객체
       history.push('/')
       console.log("========================useinfostates: ", userinfo)
 
     })
   }
+  
 
   const handleLogout = () => {
-    axios.post("http://ec2-54-180-141-64.ap-northeast-2.compute.amazonaws.com/signout")
+    axios.post("https://localhost:4000/signout")
     .then((res) => {
       setIsLogin(false);
       setUserinfo(null);
@@ -126,6 +135,7 @@ function App() {
         <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" alt="My Image"/></h1>
         </Link>
       
+
         {isLogin ===false ? 
         <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/> :
          <Tabmodal2/>}
@@ -145,14 +155,22 @@ function App() {
     
     <Switch>
     <div className='map'>
-     <Location openModalFunc3={openModalFunc3}/>
+
+
+     {/* <Location openModalFunc3={openModalFunc3}/> */}
      {/* <SignUp/>  */}
      {/* <Location/> */}
      <Route path='/mypage'  >
        <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
      </Route>
      <Route path='/mylist' >
-       <MyList isMyList={isMyList} accessToken={accessToken} />
+       <MyList writeMyComment={writeMyComment} accessToken={accessToken} />
+     </Route>
+    
+
+
+     <Route path='/mylist'>
+       <MyList isMyList={isMyList} />
      </Route>
     </div>
     </Switch>
