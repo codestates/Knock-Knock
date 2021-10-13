@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./LogIn.css";
 
 
-export default function AddToilet({ openModal }) {
+export default function AddToilet({ openModalFunc3 }) {
     const [toiletinfo, settoiletinfo] = useState({
         name: '',
         address: '',
@@ -27,7 +27,7 @@ export default function AddToilet({ openModal }) {
               },
               {
                 headers: {
-                    authorization: `Bearersss`
+                    authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImRmdmRmdnMiLCJlbWFpbCI6Ind3d3d444S044S044S0eGttQG5hdnJkZGVyc3NzLmNvbSIsInBhc3N3b3JkIjoidm1ka2VkZGRlIiwiaWF0IjoxNjM0MTI1NjE2LCJleHAiOjE2MzQxMjY1MTZ9.pn327yj0uXqWZ58v7AwEQNiLnyLEwv4BWkC8ZRbYL8Y`
             }
             }).then((res)=>{
                    console.log(res)
@@ -44,13 +44,13 @@ export default function AddToilet({ openModal }) {
 
     return (
       
-          <div className="modal" onClick={openModal}>
-            <div onClick={openModal}>
+          <div className="modal" onClick={openModalFunc3}>
+            <div onClick={openModalFunc3}>
               <div className="loginModal">
-                <span className="close" onClick={openModal}>
+                <span className="close" onClick={openModalFunc3}>
                   &times;
                 </span>
-                <div className="modalContents" onClick={openModal}>
+                <div className="modalContents" onClick={openModalFunc3}>
                   {/* <img className="logo" src="/Images/Signin/Knock-Knock logo.png" /> */}
                   <input
                     name="email"

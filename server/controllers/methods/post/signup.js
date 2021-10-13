@@ -31,13 +31,13 @@ module.exports = async (req, res) => {
         console.log(process.env.ACCESS_SECRET)
   
         const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: "15m"})
-        const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, { expiresIn: "1h"})
+        // const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, { expiresIn: "1h"})
         
-        res.cookie("refreshToken", refreshToken, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "none"
-        })
+        // res.cookie("refreshToken", refreshToken, {
+        //   httpOnly: true,
+        //   secure: true,
+        //   sameSite: "none"
+        // })
   
         res.status(201).json({
             data : { 
