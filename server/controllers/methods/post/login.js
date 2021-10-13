@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     })
 
     res.status(200).json({
-    data: {accessToken: accessToken},
+    data: {payload:payload,accessToken: accessToken},
     message: "ok"
     })
 }
