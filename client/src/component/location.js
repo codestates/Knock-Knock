@@ -66,16 +66,15 @@ const Location=()=>{
             var resultDiv = document.getElementById('result');  
              console.log('여기의 범위는', latlng);
              console.log('여기의 범위는xxxxxx', latlng.ha);
-             axios
-             .get(
-             'https://localhost:4000/toilet', {
-                params:{
-                    boundaryX: `${latlng.ha}-${latlng.oa}`,
-                    boundaryY: `${latlng.qa}-${latlng.pa}`,
-                     
-                    
-                 }, 
-            }).then((res)=>{
+
+            var config = {
+              method: 'get',
+              url: `https://localhost:4000/toilet?boudaryX=${latlng.ha}-${latlng.oa}.80&boudaryY=${latlng.qa}-${latlng.pa}`,
+              headers: { }
+            };
+            
+            axios(config)
+            .then((res)=>{
                   console.log(res)
                   
                   for(let i = 0 ; i < res.data.length; i++){
