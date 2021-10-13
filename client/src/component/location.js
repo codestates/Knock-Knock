@@ -46,6 +46,54 @@ const Location=()=>{
   /// 현재위치에 기반힌 마커 표시입니다
   //  클릭이벤트 검색 칸에서 검색이 될경우에...
   // 밑에 함수되신 특정위치 검색에의한 죄표에 핑찍기로 변경하기로합니다.
+//   Latitude: 37°29'50.28"
+// Longitude: 126°51'18.37"
+        // let toMarkerPosition  = new kakao.maps.LatLng(37.4970443481997, 126.86080724140258); 
+
+        // // 마커를 생성합니다
+        // let toMarker = new kakao.maps.Marker({
+            
+        //     position: toMarkerPosition
+        // });
+
+        // // 마커가 지도 위에 표시되도록 설정합니다
+        // toMarker.setMap(map);
+        kakao.maps.event.addListener(map, 'dragend', function() {        
+            // 지도 중심좌표를 얻어옵니다 
+            var latlng = map.getBounds(); 
+            // var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+            // message += '경도는 ' + latlng.getLng() + ' 입니다';
+            var resultDiv = document.getElementById('result');  
+             console.log('여기의 범위는', latlng);
+             console.log('여기의 범위는xxxxxx', latlng.ha);
+             axios
+             .get(
+             'https://localhost:4000/toilet', {
+                 params:{
+                     boundaryX: `${latlng.ha}-${latlng.oa}`,
+                     boundaryY: `${latlng.qa}-${latlng.pa}`,
+                 }, 
+            }).then((res)=>{
+                  console.log(res)
+                  
+                  for(let i = 0 ; i < res.data.length; i++){
+                 let toMarkerPosition  = new kakao.maps.LatLng(res.data[i].locationY, res.data[i].locationX)
+                   // console.log('여기서 찍힐까??',toMarkerPosition)
+                    let toMarker = new kakao.maps.Marker({
+                        map: map,
+                        position: toMarkerPosition,
+                        title:res.data[i].name
+                    });
+            
+                    // 마커가 지도 위에 표시되도록 설정합니다
+                    //toMarker.setMap(map);
+                  }
+              })
+              
+           });
+       
+
+
     if (navigator.geolocation && search  === '') { 
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(function(position) {

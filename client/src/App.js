@@ -38,7 +38,7 @@ function App() {
       <Link to="/">
         <h1 className="App-name" ><img src="https://discord.com/channels/@me/895109459104374804/896970244885737533" alt="My Image"/></h1>
         </Link>
-          <Tabmodal2/>
+          <Tabmodal/>
        </header>
     </div>
     <Switch>

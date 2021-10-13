@@ -1,7 +1,9 @@
 import './SignUp.css'
 import axios from "axios";
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 export default function SignUp(){
+    const history = useHistory();
  const [userinfo, setuserinfo] = useState({
         
         email: '',
@@ -40,8 +42,9 @@ console.log(userinfo)
         }
         }
         ).then((res)=>{
-               console.log(res)
-         // settoiletinfo(toiletinfo)     
+               console.log('res',res)
+         // settoiletinfo(toiletinfo) 
+         history.push('/')    
            })
         
         //console.log(toiletinfo)

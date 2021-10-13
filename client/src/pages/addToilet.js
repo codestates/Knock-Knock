@@ -51,7 +51,7 @@ export default function AddToilet({ openModal }) {
                   &times;
                 </span>
                 <div className="modalContents" onClick={openModal}>
-                  <img className="logo" src="/Images/Signin/Knock-Knock logo.png" />
+                  {/* <img className="logo" src="/Images/Signin/Knock-Knock logo.png" /> */}
                   <input
                     name="email"
                     className="loginId"
