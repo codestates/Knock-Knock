@@ -5,7 +5,7 @@ import "./LogIn.css";
 
 axios.defaults.withCredentials = true;
 
-export default function LogIn({ handleResponseSuccess, openModal }) {
+export default function LogIn({ handleResponseSuccess, openModalFunc, handleAccessToken }) {
 
     const [loginInfo, setLoginInfo] = useState({
         email: '',
@@ -25,10 +25,12 @@ export default function LogIn({ handleResponseSuccess, openModal }) {
         else {
             axios.post("https://localhost:4000/login",
             {email, password},
-            {withCredentials: true}
+            {"content-type": "application/json", withCredentials: true}
             )
             .then((res) => {
-                handleResponseSuccess()
+                
+                handleAccessToken(res.data.accessToken) // 토큰 넣어줌 
+                handleResponseSuccess() // userinfo 받아옴
             })
         }
     }
@@ -36,9 +38,9 @@ export default function LogIn({ handleResponseSuccess, openModal }) {
     return (
       
           <div className="modal" >
-            <div onClick={openModal}>
+            <div >
               <div className="loginModal">
-                <span className="close" onClick={openModal}>
+                <span className="close" onClick={openModalFunc}>
                   &times;
                 </span>
                 <div className="modalContents">

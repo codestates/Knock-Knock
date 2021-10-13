@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useState } from 'react';
-import { Link,useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./LogIn.css";
 
 
-export default function AddToilet({ openModal }) {
-  const history = useHistory();
+export default function AddToilet({ openModalFunc3 }) {
     const [toiletinfo, settoiletinfo] = useState({
         name: '',
         address: '',
@@ -21,29 +20,21 @@ export default function AddToilet({ openModal }) {
        // setErrorMessage('모든 항목은 필수입니다')
           }
          else{
-         const reqHeaders = {
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic…Q0MX0.IpW8r0VxgI0BI6isUId3b9WrCY5GxcAo3Z-GMOxNiTE', 
-            'Content-Type': 'application/json'
-         }
-
-          
-          var config = {
-            method: 'post',
-            url: 'https://localhost:4000/toilet',
-            headers: { 
-              'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic…Q0MX0.IpW8r0VxgI0BI6isUId3b9WrCY5GxcAo3Z-GMOxNiTE', 
-              'Content-Type': 'application/json'
-            },
-            data : {name : toiletinfo.name, adress: toiletinfo.adress}
-          };
-          
-          axios(config).then((res)=>{
-                   console.log('res는!!!!!',res)
+            axios
+            .post(
+              'https://localhost:4000/toilet',{
+                name:toiletinfo.name, address:toiletinfo.address
+              },
+              {
+                headers: {
+                    authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImRmdmRmdnMiLCJlbWFpbCI6Ind3d3d444S044S044S0eGttQG5hdnJkZGVyc3NzLmNvbSIsInBhc3N3b3JkIjoidm1ka2VkZGRlIiwiaWF0IjoxNjM0MTI1NjE2LCJleHAiOjE2MzQxMjY1MTZ9.pn327yj0uXqWZ58v7AwEQNiLnyLEwv4BWkC8ZRbYL8Y`
+            }
+            }).then((res)=>{
+                   console.log(res)
              // settoiletinfo(toiletinfo)     
                })
             
             console.log(toiletinfo)
-            history.push('/')  
           }
     
 
@@ -53,13 +44,13 @@ export default function AddToilet({ openModal }) {
 
     return (
       
-          <div className="modal" onClick={openModal}>
-            <div onClick={openModal}>
+          <div className="modal" onClick={openModalFunc3}>
+            <div onClick={openModalFunc3}>
               <div className="loginModal">
-                <span className="close" onClick={openModal}>
+                <span className="close" onClick={openModalFunc3}>
                   &times;
                 </span>
-                <div className="modalContents" onClick={openModal}>
+                <div className="modalContents" onClick={openModalFunc3}>
                   {/* <img className="logo" src="/Images/Signin/Knock-Knock logo.png" /> */}
                   <input
                     name="email"

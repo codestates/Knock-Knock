@@ -25,6 +25,7 @@ export default function MyPage ({ handleLogout, userinfo, handleWriteInfo }) {
                     {myInfo === false ? null : <UserInfo handleUserInfo={handleUserInfo} userinfo={userinfo} />}
                 </div>
                 <div className = "myList" onClick={handleWriteInfo}><Link to='/mylist'>내가 쓴 글 보기</Link></div>
+                <div className = "deleteMyInfo" >회원탈퇴</div>
                 <div className = "btn_container">
                 <button className = "btn_logout" onClick={handleLogout}>로그아웃</button>
                 </div>

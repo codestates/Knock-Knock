@@ -13,33 +13,59 @@ import {BrowserRouter, Route, Switch,useHistory, Link} from "react-router-dom"
 // import * as React from 'react';
 import React, { useState } from 'react';
 //import {FaRestroom} from "react-icons/fa"
+
+axios.defaults.withCredentials = true;
+
 function App() {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
-  const [writeInfo, setWriteInfo] = useState(null);
+  const [writeMyComment, setWriteMyComment] = useState(null);
+  const [writeMyToilet, setWriteMyToilet] = useState(null);
+
+  const [accessToken, setAccessToken] = useState(null);
+
+  const handleAccessToken = (res) => {
+    setAccessToken(res) // 로그인하면서 받은 엑세스 토큰
+  }
 
   const handleWriteInfo = () => {
-    axios.get("https://localhost:4000/user/mylist")
+    axios.get("https://localhost:4000/user/mylist", {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        "Content-Type" : "application/json"
+      }
+    }) // myComment, myToilet 데이터 요청
     .then((res) => {
-      setWriteInfo(res.mylist)
+      setWriteMyComment(res.myComment)
+      setWriteMyToilet(res.myToilet)
     })
   }
 
   const isAuthenticated = () => {
-    axios.get("https://localhost:4000/user/userinfo")
+    axios.get("https://localhost:4000/user/userinfo", {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        "Content-Type" : "application/json"   
+      },
+      withCredentials: true
+    })
     .then((res) => {
+      console.log("===========================res: ", res)
       setIsLogin(true);
       setUserinfo(res); // 객체 키값이 없기에 그냥 바로 res 객체
+      openModalFunc();
+      alert("나로그인됨!!!!!!!!!!!!!!!!!!!!")
       history.push('/')
+      
     })
   }
 
   const handleLogout = () => {
     axios.post("https://localhost:4000/signout")
     .then((res) => {
-      setIsLogin(true);
-      setUserinfo(res.data);
+      setIsLogin(false);
+      setUserinfo(null);
       history.push('/')
     })
   }
@@ -61,9 +87,16 @@ function App() {
   }, [])
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [isModalOpen3, setIsModalOpen3] = useState(false);
+  const openModalFunc = () => {
     setIsModalOpen(!isModalOpen);
+  }
+  const openModalFunc2 = () => {
+    setIsModalOpen2(!isModalOpen2);
+  }
+  const openModalFunc3 = () => {
+    setIsModalOpen3(!isModalOpen3);
   }
 
   return (
@@ -74,20 +107,24 @@ function App() {
       <Link to="/">
         <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" alt="My Image"/></h1>
         </Link>
-          <Tabmodal />
+          <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/>
        </header>
+       {isModalOpen === false ? null :
+     <LogIn handleResponseSuccess={handleResponseSuccess} openModalFunc={openModalFunc} handleAccessToken={handleAccessToken} />
+     }
+       {isModalOpen2 === false ? null :
+     <SignUp openModalFunc2={openModalFunc2}  />
+     } 
+        {isModalOpen3 === false ? null :
+     <AddToilet openModalFunc3={openModalFunc3}  />
+     } 
+
     </div>
     <Switch>
     <div className='map'>
-    
-     {/* <SignUp/>  */}
-     {/* <Location/> */}
-      <Route  exact path='/' component={Location}/>
-      <Route  path='/signup' component={SignUp}/>
-      <Route  path='/login' component={LogIn} handleResponseSuccess={handleResponseSuccess} openModal={openModal} />
+       <Location openModalFunc3={openModalFunc3}/>
       <Route  path='/mypage' component={MyPage} handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
-      <Route  path='/mylist' component={MyList}  writeInfo={writeInfo}/>
-      <Route  path='/toilet' component={AddToilet}/>
+      <Route  path='/mylist' component={MyList}  writeMyComment={writeMyComment} writeMyToilet={writeMyToilet}/>
     </div>
     </Switch>
   </div>  
