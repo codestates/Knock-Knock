@@ -88,9 +88,16 @@ function App() {
   }, [])
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [isModalOpen3, setIsModalOpen3] = useState(false);
   const openModalFunc = () => {
     setIsModalOpen(!isModalOpen);
+  }
+  const openModalFunc2 = () => {
+    setIsModalOpen2(!isModalOpen2);
+  }
+  const openModalFunc3 = () => {
+    setIsModalOpen3(!isModalOpen3);
   }
 
   return (
@@ -99,35 +106,41 @@ function App() {
     <div className="headerdiv">
       <header className="header" >
       <Link to="/">
-        <h1 className="App-name" ><img src="https://discord.com/channels/@me/895109459104374804/896970244885737533" alt="My Image"/></h1>
+        <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" alt="My Image"/></h1>
         </Link>
-          <Tabmodal openModalFunc={openModalFunc}/>
+          <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/>
        </header>
        {isModalOpen === false ? null :
      <LogIn handleResponseSuccess={handleResponseSuccess} openModalFunc={openModalFunc} handleAccessToken={handleAccessToken} />
      }
+       {isModalOpen2 === false ? null :
+     <SignUp openModalFunc2={openModalFunc2}  />
+     } 
+        {isModalOpen3 === false ? null :
+     <AddToilet openModalFunc3={openModalFunc3}  />
+     } 
+
     </div>
     <Switch>
     <div className='map'>
+    <Location openModalFunc3={openModalFunc3}/>
+
+       
+  
+
     
      {/* <SignUp/>  */}
      {/* <Location/> */}
 
-     <Route exact path='/'>
-       <Location />
-     </Route>
-     <Route path='/signup'>
-       <SignUp />
-     </Route>
+    
      <Route path='/mypage' handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} >
        <MyPage />
      </Route>
      <Route path='/mylist' writeMyComment={writeMyComment} writeMyToilet={writeMyToilet}>
        <MyList />
      </Route>
-     <Route path='/toilet'>
-       <AddToilet />
-     </Route>
+    
+
     </div>
     </Switch>
   </div>  
