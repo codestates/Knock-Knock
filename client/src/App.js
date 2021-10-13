@@ -20,15 +20,14 @@ function App() {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
-  const [writeMyComment, setWriteMyComment] = useState(null);
-  const [writeMyToilet, setWriteMyToilet] = useState(null);
+  const [isMyList, setIsMyList] = useState(null);
+  // const [writeMyToilet, setWriteMyToilet] = useState(null);
 
   const [accessToken, setAccessToken] = useState(null);
 
-  console.log("========================useinfostates: ", userinfo)
-
   const handleAccessToken = (accessT) => {
     setAccessToken(accessT) // 로그인하면서 받은 엑세스 토큰
+    console.log("===================accessToken: ", accessToken)
   }
 
   const handleWriteInfo = () => {
@@ -39,13 +38,16 @@ function App() {
       }
     }) // myComment, myToilet 데이터 요청
     .then((res) => {
-      setWriteMyComment(res.myComment)
-      setWriteMyToilet(res.myToilet)
+      console.log("===================mylist: ", res)
+
+      setIsMyList(res.data)
+
+      console.log("===============isMyList: ", isMyList)
     })
   }
 
   const isAuthenticated = () => {
-    axios.get("https://localhost:4000/user/userinfo", {
+    axios.get("https://localhost:4000/user/userinfo", { // userinfo 요청
       headers: {
         authorization: `${accessToken}`,
         "Content-Type" : "application/json"   
@@ -53,11 +55,11 @@ function App() {
       withCredentials: true
     })
     .then((res) => {
-      setIsLogin(true);
+      setIsLogin(true); // 로그인 상태 바꿔줌
       setUserinfo(res.data); // res.data 안에 엑세스토큰과 userinfo 존재
       openModalFunc();
-      alert("로그인이 완료되었습니다")
       history.push('/')
+      alert("로그인이 완료되었습니다")
       
     })
   }
@@ -67,7 +69,9 @@ function App() {
     .then((res) => {
       setIsLogin(false);
       setUserinfo(null);
-      history.push('/')
+      window.location.replace('/') 
+      alert("로그아웃을 완료했습니다")
+      
     })
   }
 
@@ -90,6 +94,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [isModalOpen3, setIsModalOpen3] = useState(false);
+
   const openModalFunc = () => {
     setIsModalOpen(!isModalOpen);
   }
@@ -109,6 +114,7 @@ function App() {
         <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" alt="My Image"/></h1>
         </Link>
           <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/>
+          <Tabmodal2 handleLogout={handleLogout}/>
        </header>
        {isModalOpen === false ? null :
      <LogIn handleResponseSuccess={handleResponseSuccess} openModalFunc={openModalFunc} handleAccessToken={handleAccessToken} />
@@ -123,32 +129,23 @@ function App() {
     </div>
     <Switch>
     <div className='map'>
-    <Location openModalFunc3={openModalFunc3}/>
-
-       
-  
-
-    
+    {/* <Location openModalFunc3={openModalFunc3}/> */}    
      {/* <SignUp/>  */}
      {/* <Location/> */}
-
-    
-     <Route path='/mypage' handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} >
-       <MyPage />
+     {/* <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} /> */}
+     <Route path='/mypage' >
+       <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
      </Route>
-     <Route path='/mylist' writeMyComment={writeMyComment} writeMyToilet={writeMyToilet}>
-       <MyList />
-     </Route>
-    
 
+     <Route path='/mylist'>
+       <MyList isMyList={isMyList} />
+     </Route>
     </div>
     </Switch>
   </div>  
   </BrowserRouter>
   
- 
   );
-  
 }
 
 export default App;

@@ -27,7 +27,7 @@ export default function LogIn({ handleResponseSuccess, openModalFunc, handleAcce
             {email, password},
             {"content-type": "application/json", withCredentials: true}
             )
-            .then((res) => {
+            .then((res) => { // res.data.message
               // console.log(res.data.data.accessToken)
                 handleAccessToken(res.data.data.accessToken) // 토큰 넣어줌 
                 
