@@ -112,14 +112,14 @@ const Location=()=>{
             ////
             /////
             /////바운드를이용한 마커찍기
-           let bounds = map.getBounds()
-                console.log('범위는???',bounds)
-            axios
-            .get(
-            'https://localhost:4000/toilet'
-             ).then((res)=>{
-                 console.log(res)
-             })
+        //    let bounds = map.getBounds()
+        //         console.log('범위는???',bounds)
+        //     axios
+        //     .get(
+        //     'https://localhost:4000/toilet'
+        //      ).then((res)=>{
+        //          console.log(res)
+        //      })
          
           });
         
