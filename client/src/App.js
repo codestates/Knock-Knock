@@ -20,17 +20,32 @@ function App() {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
+
   const [isMyList, setIsMyList] = useState(null);
-  // const [writeMyToilet, setWriteMyToilet] = useState(null);
 
   const [accessToken, setAccessToken] = useState(null);
 
-  const handleAccessToken = (accessT) => {
-    setAccessToken(accessT) // 로그인하면서 받은 엑세스 토큰
-    console.log("===================accessToken: ", accessToken)
+
+
+
+  const handleUserinfo = (accessP) =>{
+    setUserinfo(accessP)
+    setIsLogin(true)
   }
 
-  const handleWriteInfo = () => {
+
+
+  const handleAccessToken = (accessT) => {
+    console.log('accccccceessstyttttttttt',accessT)
+    setAccessToken(accessT) // 로그인하면서 받은 엑세스 토큰
+
+
+
+    
+
+  }
+  
+  const handleWriteInfo = (accessT) => {
     axios.get("https://localhost:4000/user/mylist", {
       headers: {
         authorization: `${accessToken}`,
@@ -47,7 +62,11 @@ function App() {
   }
 
   const isAuthenticated = () => {
-    axios.get("https://localhost:4000/user/userinfo", { // userinfo 요청
+  
+
+
+    axios.get("https://localhost:4000/user/userinfo", {
+
       headers: {
         authorization: `${accessToken}`,
         "Content-Type" : "application/json"   
@@ -55,14 +74,16 @@ function App() {
       withCredentials: true
     })
     .then((res) => {
-      setIsLogin(true); // 로그인 상태 바꿔줌
-      setUserinfo(res.data); // res.data 안에 엑세스토큰과 userinfo 존재
-      openModalFunc();
+  
+
+      console.log('22222222222222',res)
+       // 객체 키값이 없기에 그냥 바로 res 객체
       history.push('/')
-      alert("로그인이 완료되었습니다")
-      
+      console.log("========================useinfostates: ", userinfo)
+
     })
   }
+  
 
   const handleLogout = () => {
     axios.post("https://localhost:4000/signout")
@@ -113,29 +134,40 @@ function App() {
       <Link to="/">
         <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" alt="My Image"/></h1>
         </Link>
-          <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/>
-          <Tabmodal2 handleLogout={handleLogout}/>
+      
+
+        {isLogin ===false ? 
+        <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/> :
+         <Tabmodal2/>}
+         {/* <Tabmodal openModalFunc={openModalFunc} openModalFunc2={openModalFunc2}/> */}
+
        </header>
        {isModalOpen === false ? null :
-     <LogIn handleResponseSuccess={handleResponseSuccess} openModalFunc={openModalFunc} handleAccessToken={handleAccessToken} />
+     <LogIn handleResponseSuccess={handleResponseSuccess} openModalFunc={openModalFunc} handleAccessToken={handleAccessToken} isAuthenticated={isAuthenticated} handleUserinfo={handleUserinfo}/>
      }
        {isModalOpen2 === false ? null :
      <SignUp openModalFunc2={openModalFunc2}  />
      } 
         {isModalOpen3 === false ? null :
-     <AddToilet openModalFunc3={openModalFunc3}  />
+     <AddToilet openModalFunc3={openModalFunc3} accessToken={accessToken} />
      } 
-
     </div>
+    
     <Switch>
     <div className='map'>
-    {/* <Location openModalFunc3={openModalFunc3}/> */}    
+
+
+     {/* <Location openModalFunc3={openModalFunc3}/> */}
      {/* <SignUp/>  */}
      {/* <Location/> */}
-     {/* <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} /> */}
-     <Route path='/mypage' >
+     <Route path='/mypage'  >
        <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
      </Route>
+     <Route path='/mylist' >
+       <MyList writeMyComment={writeMyComment} accessToken={accessToken} />
+     </Route>
+    
+
 
      <Route path='/mylist'>
        <MyList isMyList={isMyList} />

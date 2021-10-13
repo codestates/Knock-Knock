@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link ,useHistory} from "react-router-dom";
 import axios from 'axios'
 import "./LogIn.css";
 
 axios.defaults.withCredentials = true;
 
-export default function LogIn({ handleResponseSuccess, openModalFunc, handleAccessToken }) {
-
+export default function LogIn({ handleResponseSuccess, openModalFunc, handleAccessToken,isAuthenticated,handleUserinfo }) {
+  const history = useHistory();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: ''
@@ -27,11 +27,15 @@ export default function LogIn({ handleResponseSuccess, openModalFunc, handleAcce
             {email, password},
             {"content-type": "application/json", withCredentials: true}
             )
-            .then((res) => { // res.data.message
-              // console.log(res.data.data.accessToken)
-                handleAccessToken(res.data.data.accessToken) // 토큰 넣어줌 
-                
-                handleResponseSuccess() // userinfo 받아옴
+
+            .then((res) => {
+               console.log('toooooooooookkkkken',res.data.data)
+               openModalFunc()
+              handleAccessToken(res.data.data.accessToken) // 토큰 넣어줌 
+              handleUserinfo(res.data.data.payload)
+              alert("로그인이 완료되었습니다")
+              history.push('/')
+              
             })
         }
     }
