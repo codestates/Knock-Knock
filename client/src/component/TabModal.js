@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 //quick merge 
 //
 
-function TabModal(){
+function TabModal( {openModalFunc} ){
  const[showTabModal, setshowTabModal ] = useState(false) 
  console.log('showTabmodal은123',showTabModal)
    
@@ -44,9 +44,9 @@ function TabModal(){
             <div onClick={openModal}>menu</div> 
             </div>
           : <div className='ModalContainer2'  >
-            <Link to="/login">
-            <div className='tablist'>로그인</div>
-            </Link>
+   
+            <div className='tablist' onClick={openModalFunc}>로그인</div>
+
             <Link to="/signup">
             <div className='tablist'>회원가입</div>
             </Link>

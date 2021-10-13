@@ -22,11 +22,18 @@ console.log(userinfo)
  const validSignup = () =>{ //여기서 콜백 넘기는이유가
     if(userinfo.email ==='' || userinfo.password ==='' || userinfo.username ==='' || userinfo.confirmpassword ==='' ){
         setErrorMessage('모든 항목은 필수입니다')
-       // console.log('첫번째 if문')
+
       }
       else if(userinfo.password !== userinfo.confirmpassword) {
         setErrorMessage('비밀번호가 일치하지 않습니다') 
-        //console.log('두번째 if문')
+    
+
+       
+      }
+      else if(userinfo.password !== userinfo.confirmpassword) {
+        setErrorMessage('비밀번호가 일치하지 않습니다') 
+        
+
       }
       
       else{
