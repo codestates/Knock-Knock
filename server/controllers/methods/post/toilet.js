@@ -6,9 +6,11 @@ const unirest = require('unirest');
 
 module.exports = async (req, res) => {
   const authorization = req.headers['authorization'];
+  console.log('여기는 화장실/post/toilet',authorization)
   jwt.verify(authorization,process.env.ACCESS_SECRET , async function(err,decoded){
     //받아온 엑세스 토큰이 없거나 만료되었으면
     console.log(decoded)
+    console.log(authorization)
     if(err) res.send("만료 또는 유효하지 않음")
     
     else {
@@ -61,14 +63,17 @@ module.exports = async (req, res) => {
               const inputData = {
                 name: name,
                 address: address,
-                location: {y, x},
+                accessible_toilet_male: true,
+                ccessible_toilet_female: true,
+                locationY: y,
+                locationX: x,
               }
     
               //필수항목이 아닌경우 있는 데이터만 넣어주기
               if(user_id) inputData.user_id = user_id
               if(img_url) inputData.img_url = img_url
-              if(accessible_toilet_male) inputData.accessible_toilet_male = accessible_toilet_male
-              if(accessible_toilet_female) inputData.accessible_toilet_female = accessible_toilet_female
+              //if(accessible_toilet_male) inputData.accessible_toilet_male = accessible_toilet_male
+             // if(accessible_toilet_female) inputData.accessible_toilet_female = accessible_toilet_female
         
               db.toilet.findOrCreate({
                 where: {

@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import "./LogIn.css";
+import {useHistory} from "react-router-dom"
 
 
-export default function AddToilet({ openModalFunc3 }) {
+export default function AddToilet({ openModalFunc3,accessToken }) {
+  const history = useHistory();
     const [toiletinfo, settoiletinfo] = useState({
         name: '',
         address: '',
@@ -19,6 +21,8 @@ export default function AddToilet({ openModalFunc3 }) {
       if(toiletinfo.name ==='' || toiletinfo.address ==='' ){
        // setErrorMessage('모든 항목은 필수입니다')
           }
+          
+          
          else{
             axios
             .post(
@@ -27,13 +31,21 @@ export default function AddToilet({ openModalFunc3 }) {
               },
               {
                 headers: {
-                    authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImRmdmRmdnMiLCJlbWFpbCI6Ind3d3d444S044S044S0eGttQG5hdnJkZGVyc3NzLmNvbSIsInBhc3N3b3JkIjoidm1ka2VkZGRlIiwiaWF0IjoxNjM0MTI1NjE2LCJleHAiOjE2MzQxMjY1MTZ9.pn327yj0uXqWZ58v7AwEQNiLnyLEwv4BWkC8ZRbYL8Y`
+                    authorization: `${accessToken}`
             }
             }).then((res)=>{
                    console.log(res)
-             // settoiletinfo(toiletinfo)     
+             // settoiletinfo(toiletinfo)
+               if(res.data.message==='화장실 등록이 완료되었습니다'){
+                alert(" 화장실 등록이 완료되었습니다")
+                window.location.replace('/')
+               }
+               else{
+                alert("없는주소입니다.")
+               }
+              
                })
-            
+               console.log(accessToken) 
             console.log(toiletinfo)
           }
     
@@ -44,13 +56,13 @@ export default function AddToilet({ openModalFunc3 }) {
 
     return (
       
-          <div className="modal" onClick={openModalFunc3}>
-            <div onClick={openModalFunc3}>
+          <div className="modal" >
+            <div >
               <div className="loginModal">
                 <span className="close" onClick={openModalFunc3}>
                   &times;
                 </span>
-                <div className="modalContents" onClick={openModalFunc3}>
+                <div className="modalContents" >
                   {/* <img className="logo" src="/Images/Signin/Knock-Knock logo.png" /> */}
                   <input
                     name="email"
