@@ -1,3 +1,4 @@
+
 /*global kakao*/ 
 //위주석은 지우지마세요!!!
 //화장실위치를 찾아주는건데 ...
@@ -17,7 +18,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './location.css'
-const Location=()=>{
+import { Link } from "react-router-dom";
+const Location=({openModalFunc3})=>{
     const [searchAdress, setsearchAdress] = useState({
         adress : ''
     })
@@ -44,6 +46,60 @@ const Location=()=>{
   /// 현재위치에 기반힌 마커 표시입니다
   //  클릭이벤트 검색 칸에서 검색이 될경우에...
   // 밑에 함수되신 특정위치 검색에의한 죄표에 핑찍기로 변경하기로합니다.
+//   Latitude: 37°29'50.28"
+// Longitude: 126°51'18.37"
+        // let toMarkerPosition  = new kakao.maps.LatLng(37.4970443481997, 126.86080724140258); 
+
+        // // 마커를 생성합니다
+        // let toMarker = new kakao.maps.Marker({
+            
+        //     position: toMarkerPosition
+        // });
+
+        // // 마커가 지도 위에 표시되도록 설정합니다
+        // toMarker.setMap(map);
+        kakao.maps.event.addListener(map, 'dragend', function() {        
+            // 지도 중심좌표를 얻어옵니다 
+            var latlng = map.getBounds(); 
+            // var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+            // message += '경도는 ' + latlng.getLng() + ' 입니다';
+            var resultDiv = document.getElementById('result');  
+             console.log('여기의 범위는', latlng);
+             console.log('여기의 범위는xxxxxx', latlng.ha);
+
+            var config = {
+              method: 'get',
+              url: `https://localhost:4000/toilet?boudaryX=${latlng.ha}-${latlng.oa}.80&boudaryY=${latlng.qa}-${latlng.pa}`,
+              headers: { }
+            };
+            
+            axios(config)
+            .then((res)=>{
+                  console.log(res)
+                 // console.log('장애인화장실표시가있을까요?',res.data[0])
+                  for(let i = 0 ; i < res.data.length; i++){
+                    // accessible_toilet_female: false
+                    // accessible_toilet_male: false
+                      if(res.data[i].accessible_toilet_male===true || res.data[i].accessible_toilet_female === true){
+                          console.log('장장애인화장실표시가있을까요?애',res.data[i])
+                        var toMarkerPosition  = new kakao.maps.LatLng(res.data[i].locationY, res.data[i].locationX)
+                   // console.log('여기서 찍힐까??',toMarkerPosition)
+                        var toMarker = new kakao.maps.Marker({
+                        map: map,
+                        position: toMarkerPosition,
+                        title:res.data[i].name
+                    });
+            
+                    // 마커가 지도 위에 표시되도록 설정합니다
+                    //toMarker.setMap(map);
+                   }
+                }
+              })
+              
+           });
+       
+
+
     if (navigator.geolocation && search  === '') { 
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -60,14 +116,53 @@ const Location=()=>{
             ////
             /////
             /////바운드를이용한 마커찍기
-           let bounds = map.getBounds()
-                console.log('범위는???',bounds)
-            axios
-            .get(
-            'https://localhost:4000/toilet'
-             ).then((res)=>{
-                 console.log(res)
-             })
+        //    let bounds = map.getBounds()
+        //         console.log('범위는???',bounds)
+        //     axios
+        //     .get(
+        //     'https://localhost:4000/toilet'
+        //      ).then((res)=>{
+        //          console.log(res)
+        //      })
+       // kakao.maps.event.addListener(map, 'dragend', function() {        
+            // 지도 중심좌표를 얻어옵니다 
+            var latlng = map.getBounds(); 
+            // var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+            // message += '경도는 ' + latlng.getLng() + ' 입니다';
+            var resultDiv = document.getElementById('result');  
+             console.log('여기의 범위는', latlng);
+             console.log('여기의 범위는xxxxxx', latlng.ha);
+
+            var config = {
+              method: 'get',
+              url: `https://localhost:4000/toilet?boudaryX=${latlng.ha}-${latlng.oa}.80&boudaryY=${latlng.qa}-${latlng.pa}`,
+              headers: { }
+            };
+            
+            axios(config)
+            .then((res)=>{
+                  console.log(res)
+                 // console.log('장애인화장실표시가있을까요?',res.data[0])
+                  for(let i = 0 ; i < res.data.length; i++){
+                    // accessible_toilet_female: false
+                    // accessible_toilet_male: false
+                      if(res.data[i].accessible_toilet_male===true || res.data[i].accessible_toilet_female === true){
+                          console.log('장장애인화장실표시가있을까요?애',res.data[i])
+                        var toMarkerPosition  = new kakao.maps.LatLng(res.data[i].locationY, res.data[i].locationX)
+                   // console.log('여기서 찍힐까??',toMarkerPosition)
+                        var toMarker = new kakao.maps.Marker({
+                        map: map,
+                        position: toMarkerPosition,
+                        title:res.data[i].name
+                    });
+            
+                    // 마커가 지도 위에 표시되도록 설정합니다
+                    //toMarker.setMap(map);
+                   }
+                }
+              })
+              
+       //    });
          
           });
         
@@ -94,8 +189,48 @@ const Location=()=>{
               ///
               ///
               console.log('범위는???',bounds)
+                // kakao.maps.event.addListener(map, 'dragend', function() {        
+            // 지도 중심좌표를 얻어옵니다 
+            var latlng = map.getBounds(); 
+            // var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+            // message += '경도는 ' + latlng.getLng() + ' 입니다';
+            var resultDiv = document.getElementById('result');  
+             console.log('여기의 범위는', latlng);
+             console.log('여기의 범위는xxxxxx', latlng.ha);
+
+            var config = {
+              method: 'get',
+              url: `https://localhost:4000/toilet?boudaryX=${latlng.ha}-${latlng.oa}.80&boudaryY=${latlng.qa}-${latlng.pa}`,
+              headers: { }
+            };
+            
+            axios(config)
+            .then((res)=>{
+                  console.log(res)
+                 // console.log('장애인화장실표시가있을까요?',res.data[0])
+                  for(let i = 0 ; i < res.data.length; i++){
+                    // accessible_toilet_female: false
+                    // accessible_toilet_male: false
+                      if(res.data[i].accessible_toilet_male===true || res.data[i].accessible_toilet_female === true){
+                          console.log('장장애인화장실표시가있을까요?애',res.data[i])
+                        var toMarkerPosition  = new kakao.maps.LatLng(res.data[i].locationY, res.data[i].locationX)
+                   // console.log('여기서 찍힐까??',toMarkerPosition)
+                        var toMarker = new kakao.maps.Marker({
+                        map: map,
+                        position: toMarkerPosition,
+                        title:res.data[i].name
+                    });
+            
+                    // 마커가 지도 위에 표시되도록 설정합니다
+                    //toMarker.setMap(map);
+                   }
+                }
+              })
+              
+       //    });
             }
         }) //1번인자 주소 2번인자 검색결과를받을 포함 3
+        
       }
     else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
         
@@ -159,10 +294,18 @@ const Location=()=>{
             <div className='searchBox'>
              <input className='search' onChange={handleSearchValue('adress')}></input>
              <button onClick={searchClick}>검색</button>
+             <div>
+             
+             <button onClick={openModalFunc3}>화장실 추가하기</button> 
+             
+             </div>
              </div>
              <div className='backCurLoc'>
              <button onClick={resetSearch}>현재위치</button>    
-             </div>    
+             </div>      
+             
+             
+            
         	<div className='map' id="map" style={{ width:"100%", height:"100%",position: "sticky"}}></div> 
         </div>
     )

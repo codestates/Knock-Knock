@@ -5,6 +5,7 @@
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.6);  
+    z-index: 1050;
   }
   
   .loginModal {
@@ -22,6 +23,7 @@
      float: right;
      font-size: 25px;
      color: black;
+     cursor: pointer
    }
   
    .modalContents {
@@ -35,10 +37,11 @@
      flex-direction: column;
    }
   
-   .logo {
-     text-align: center;
-    /* width: 100px; */
+  
+   .Knock_logo {
      margin: 0 auto;
+     width: 160px;
+     height: 150px;
    }
   
   
@@ -75,6 +78,7 @@
             font-size: 12px;
             color: #8d8d8d;
             line-height: 3;
+            cursor: pointer
           }
   
         .loginBtn {
@@ -104,6 +108,7 @@
             box-sizing: border-box;
             margin-bottom: 10px;
             border-radius: 3px;
+            cursor: pointer
           }
             .kakaoLogo {
               width: 24px;
@@ -118,29 +123,30 @@
               box-sizing: border-box;
             }
   
-          .facebook {
-            background-color: #21538a;
-            border-color: #21538a;
+          .google {
+            background-color: none;
+            border: 1px solid rgb(124, 124, 124);
             height: 40px;
             display: flex;
             justify-content: center;
             box-sizing: border-box;
-            color: #fff;
+            color: rgb(0, 0, 0);
             border-radius: 3px;
+            cursor: pointer
           }
   
-            .facebookText {
+            .googleText {
               padding-top: 12px;
               width: 310px;
-              color: #fff;
+              color: rgb(0, 0, 0);
               font-size: 15px;
               text-align: center;
               box-sizing: border-box;
             }
   
-            .facebookLogo {
+            .googleLogo {
               padding-top: 7px;
-              width: 24px;
+              width: 25px;
               height: 25px;
             }
   
@@ -154,6 +160,7 @@
             color: #bcbcbc;
             font-size: 11px;
             margin-bottom: 35px;
+            cursor: pointer
           }
   
             a {
@@ -166,7 +173,3 @@
             text-decoration: underline;
           }
         
-          .knock_logo{
-              width:10%;
-              height:10%;
-          }

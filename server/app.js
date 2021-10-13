@@ -10,7 +10,7 @@ const controllers = require("./controllers")
 
 const app = express();
 app.use(express.json());
-const HTTPS_PORT = 443;
+const HTTPS_PORT = 4000;
 
 
 app.use(
@@ -47,10 +47,10 @@ if(fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")){
   const credentials = { key: privateKey, cert: certificate };
 
   server = https.createServer(credentials, app);
-  server.listen(HTTPS_PORT, () => console.log("Port : 443, server runnning"));
+  server.listen(HTTPS_PORT, () => console.log("Port : 4000, server runnning"));
 
 } else {
-  server = app.listen(80)
+  server = app.listen(HTTPS_PORT)
 }
 
 module.exports = server;

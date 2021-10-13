@@ -8,20 +8,24 @@
 .mapdiv{
     z-index: 2;
     border: 1px solid red;
+    width: 98%;
     margin: 1%;
-    height: 150%;
+    height: 75%;
+    position: absolute;
+    right: 0%;
+   
 }
 
 .searchBox{
     border: 1px solid red;
     z-index: 3;
     position: absolute;
-    top: 15%;
+    top: 4%;
     left: 2%;
 }
 .backCurLoc{
     position: absolute;
-    top: 15%;
+    top: 4%;
     right: 2%;
     z-index: 3;
 }

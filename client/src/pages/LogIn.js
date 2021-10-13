@@ -1,32 +1,64 @@
-import React from "react";
-// import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import { Link } from "react-router-dom";
+import axios from 'axios'
 import "./LogIn.css";
 
-export default function LogIn({ openModal }) {
+axios.defaults.withCredentials = true;
+
+export default function LogIn({ handleResponseSuccess, openModalFunc, handleAccessToken }) {
+
+    const [loginInfo, setLoginInfo] = useState({
+        email: '',
+        password: ''
+    })
+
+    const handleInputValue = (key) => (e) => {
+        setLoginInfo({ ...loginInfo, [key]: e.target.value })
+    }
+
+    const handleLogin = () => {
+        const {email, password} = loginInfo
+
+        if(email === '' || password === '') {
+            alert("이메일과 비밀번호를 모두 입력하세요")
+        }
+        else {
+            axios.post("https://localhost:4000/login",
+            {email, password},
+            {"content-type": "application/json", withCredentials: true}
+            )
+            .then((res) => {
+              // console.log(res.data.data.accessToken)
+                handleAccessToken(res.data.data.accessToken) // 토큰 넣어줌 
+                
+                handleResponseSuccess() // userinfo 받아옴
+            })
+        }
+    }
 
     return (
       
-          <div className="modal" onClick={openModal}>
-            <div onClick={openModal}>
+          <div className="modal" >
+            <div >
               <div className="loginModal">
-                <span className="close" onClick={openModal}>
+                <span className="close" onClick={openModalFunc}>
                   &times;
                 </span>
-                <div className="modalContents" onClick={openModal}>
-                  <img className="logo" src="/Images/Signin/Knock-Knock logo.png" />
+                <div className="modalContents">
+                <img className="Knock_logo" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" />
                   <input
                     name="email"
                     className="loginId"
-                    type="text"
+                    type="email"
                     placeholder="아이디"
-                    // onChange={this.loginHandler}
+                    onChange={handleInputValue("email")}
                   />
                   <input
                     name="password"
                     className="loginPw"
                     type="password"
                     placeholder="비밀번호"
-                    // onChange={this.loginHandler}
+                    onChange={handleInputValue("password")}
                   />
                   <div className="loginMid">
                     <label className="autoLogin" for="hint">
@@ -35,26 +67,17 @@ export default function LogIn({ openModal }) {
                     </label>
                     <div className="autoLogin">아이디/비밀번호 찾기</div>
                   </div>
-                  <button className="loginBtn">
+                  <button className="loginBtn" onClick={handleLogin}>
                     {" "}
                     로그인{" "}
                   </button>
-                  <div className="socialBox">
-                    <div className="kakao">
-                      <div className="kakaoText">카카오 계정으로 신규가입</div>
-                    </div>
-                    <div className="facebook">
-                      <div className="facebookText">
-                        페이스북 계정으로 신규가입
-                      </div>
-                    </div>
-                  </div>
                   <div className="loginEnd">
                     <div className="loginLine">
-                      회원이 아니신가요? 
+                     <Link to="/signup">회원이 아니신가요?</Link> 
                     </div>
-                    <div className="noUser">비회원 주문 조회</div>
                   </div>
+                </div>
+                <div className="logo_box">
                 </div>
               </div>
             </div>

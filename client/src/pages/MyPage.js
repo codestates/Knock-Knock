@@ -1,19 +1,35 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios'
 import "./MyPage.css"
+import UserInfo from "./UserInfo"
+import "./UserInfo.css"
+
 
 axios.defaults.withCredentials = true;
 
-export default function MyPage () {
+export default function MyPage ({ handleLogout, userinfo, handleWriteInfo }) {
+
+    console.log("=================================userinfo: ", userinfo)
+
+    const [myInfo, setMyInfo] = useState(false);
+
+    const handleUserInfo = () => {
+       setMyInfo(!myInfo);
+    }
+
     return (
         <div>
             <center className = "centerBox">
                 <h1 className = "h1">My Page</h1>
-                <div className = "modifyUserInfo"><Link to='/userinfo'>내 정보 수정하기</Link></div>
-                <div className = "myList"><Link to='/mylist'>내가 쓴 글 보기</Link></div>
+                <div className = "seeUserInfo" onClick={handleUserInfo}>
+                    <div className = "modalUserInfo">{myInfo === false ? "내 정보 보기" : ""}</div>
+                    {myInfo === false ? null : <UserInfo handleUserInfo={handleUserInfo} userinfo={userinfo} />}
+                </div>
+                <div className = "myList" onClick={handleWriteInfo}><Link to='/mylist'>내가 쓴 글 보기</Link></div>
+                <div className = "deleteMyInfo" >회원탈퇴</div>
                 <div className = "btn_container">
-                <button className = "btn_logout">로그아웃</button>
+                <button className = "btn_logout" onClick={handleLogout}>로그아웃</button>
                 </div>
             </center>
         </div>
