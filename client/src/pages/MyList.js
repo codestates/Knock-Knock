@@ -2,14 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import "./MyList.css"
 
-const MyList = ( {writeInfo} ) => {
+const MyList = ( { isMyList } ) => {
 
-    
+    console.log("==============================isMyList(latest)", isMyList)
 
     return (
         <div>
-            {/* <span>{writeInfo.toilet}</span>
-            <span>{writeInfo.comment}</span> */}
+            {/* <div>{isMyList.myComment}</div>
+            <div>{isMyList.myToilet}</div> */}
         </div>
     )
 }

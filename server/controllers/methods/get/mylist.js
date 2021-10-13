@@ -21,21 +21,34 @@ module.exports = async (req, res) => {
       const userData = await db.user.findOne({
         where: tokenData
       })
-
+      // console.log(userData)
       if(!userData) {
         res.send("잘못된 정보 토큰 입니다")
       } else {
         
-        const myCommnet = await db.comment.findAll({
-          where: { user_id: tokenData.id }
+        const myComment = await db.comment.findAll({
+          where: { user_id: Number(tokenData.id) }
         })
 
         const myToilet = await db.toilet.findAll({
-          where: { user_id: tokenData.id }
+          where: { user_id: Number(tokenData.id) }
         })
 
+        const myToilet1 = await db.toilet.findOne({
+          where: { user_id: 1 }
+        })
+
+      
+
+
+        // console.log(myComment)
+        // console.log(myToilet)
+        // console.log(tokenData)
+
         res.json({
-         // myCommnet: myCommnet,
+
+          myComment: myComment,
+
           myToilet: myToilet,
           message: "ok"
         })

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TabModal2.css'
 import { Link } from "react-router-dom";
-function TabModal2(){
+function TabModal2( {handleLogout} ){
  const[showTabModal, setshowTabModal ] = useState(false) 
    const openModal = () => {
        setshowTabModal(!showTabModal)
@@ -16,8 +16,7 @@ function TabModal2(){
             <Link to="/mypage">
             <div className='tablist'>마이페이지</div>
             </Link>
-            
-            <div className='tablist'>로그아웃</div>
+            <div className='tablist' onClick={handleLogout}>로그아웃</div>
             </div >
          
        
