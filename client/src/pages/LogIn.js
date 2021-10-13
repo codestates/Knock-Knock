@@ -27,6 +27,7 @@ export default function LogIn({ handleResponseSuccess, openModalFunc, handleAcce
             {email, password},
             {"content-type": "application/json", withCredentials: true}
             )
+
             .then((res) => {
                console.log('toooooooooookkkkken',res.data.data)
                openModalFunc()
