@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import "./LogIn.css";
 
 
 export default function AddToilet({ openModal }) {
+  const history = useHistory();
     const [toiletinfo, settoiletinfo] = useState({
         name: '',
         address: '',
@@ -23,18 +24,20 @@ export default function AddToilet({ openModal }) {
             axios
             .post(
               'https://localhost:4000/toilet',{
-                name:toiletinfo.name, address:toiletinfo.address
+                name:toiletinfo.name,
+                 address:toiletinfo.address
               },
               {
                 headers: {
-                    authorization: `Bearersss`
+                    authorization:`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic…DM0fQ.GandDwD2fbIuPdAYxt0Qqt0Ogsn6G2wz1uBJvtDSzas`
             }
             }).then((res)=>{
-                   console.log(res)
+                   console.log('res는!!!!!',res)
              // settoiletinfo(toiletinfo)     
                })
             
             console.log(toiletinfo)
+            history.push('/')  
           }
     
 

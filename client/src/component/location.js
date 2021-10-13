@@ -210,13 +210,18 @@ const Location=()=>{
             <div className='searchBox'>
              <input className='search' onChange={handleSearchValue('adress')}></input>
              <button onClick={searchClick}>검색</button>
+             <div>
+             <Link to="/toilet">
+             <button>화장실 추가하기</button> 
+             </Link>
+             </div>
              </div>
              <div className='backCurLoc'>
              <button onClick={resetSearch}>현재위치</button>    
              </div>      
-             <Link to="/toilet">
-             <span >화장실추222222222가</span> 
-             </Link>
+             
+             
+            
         	<div className='map' id="map" style={{ width:"100%", height:"100%",position: "sticky"}}></div> 
         </div>
     )

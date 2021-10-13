@@ -72,7 +72,7 @@ function App() {
     <div className="headerdiv">
       <header className="header" >
       <Link to="/">
-        <h1 className="App-name" ><img src="https://discord.com/channels/@me/895109459104374804/896970244885737533" alt="My Image"/></h1>
+        <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" alt="My Image"/></h1>
         </Link>
           <Tabmodal />
        </header>
