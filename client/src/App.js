@@ -55,7 +55,7 @@ function App() {
       setIsLogin(true);
       setUserinfo(res); // 객체 키값이 없기에 그냥 바로 res 객체
       openModalFunc();
-      alert("나로그인됨!!!!!!!!!!!!!!!!!!!!")
+      alert("로그인이 완료되었습니다")
       history.push('/')
       
     })
