@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import LogIn from './pages/LogIn'
 import MyPage from './pages/MyPage'
 import Location from './component/location'
+import AddToilet from './pages/addToilet'
 import {BrowserRouter, Route, Switch,useHistory, Link} from "react-router-dom"
 // import * as React from 'react';
 import React, { useState } from 'react';
@@ -48,7 +49,11 @@ function App() {
       <Route  exact path='/' component={Location}/>
       <Route  path='/signup' component={SignUp}/>
       <Route  path='/login' component={LogIn} openModal={openModal}/>
+
+      <Route  path='/toilet' component={AddToilet}/>
+
       <Route  path='/MyPage' component={MyPage}/>
+
     </div>
     </Switch>
   </div>  
