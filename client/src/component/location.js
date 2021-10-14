@@ -273,7 +273,7 @@ const Location=({openModalFunc3})=>{
         // 지도 중심좌표를 접속위치로 변경합니다
         map.setCenter(locPosition);      
     }  
-     function displayToiletMarker(toLocPosition, toiletInfo){
+     function displayToiletMarker(toLocPosition, toiletInfo){  ///요기기ㅣ기기기기기
         let toImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
         toImageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         toImageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.

@@ -94,7 +94,6 @@ function App() {
        // 객체 키값이 없기에 그냥 바로 res 객체
       history.push('/')
       console.log("========================useinfostates: ", userinfo)
-
     })
   }
 
