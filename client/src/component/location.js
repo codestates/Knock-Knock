@@ -34,7 +34,15 @@ const Location=({openModalFunc3})=>{
     };
     const resetSearch=()=>{
         setsearch('')
+
     }
+    const handleKeyUp=(e)=> {
+      if(e.key === "Enter") {
+        console.log("e : ", e)
+        return searchClick()
+      }
+    }
+
   useEffect(()=>{
     console.log('effect안의 search는',!search)
     let container = document.getElementById('map');
@@ -296,7 +304,7 @@ const Location=({openModalFunc3})=>{
     return (
         <div className='mapdiv'>
             <div className='searchBox'>
-             <input className='search' onChange={handleSearchValue('adress')}></input>
+             <input className='search' onChange={handleSearchValue('adress')} onKeyUp={handleKeyUp}></input>
              <button onClick={searchClick}>검색</button>
              <div>
              
