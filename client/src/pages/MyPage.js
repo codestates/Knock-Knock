@@ -9,10 +9,10 @@ import "./UserInfo.css"
 axios.defaults.withCredentials = true;
 
 export default function MyPage ({ handleLogout, userinfo, handleWriteInfo }) {
+    
+const [myInfo, setMyInfo] = useState(false);
 
-
-    const [myInfo, setMyInfo] = useState(false);
-
+    
     const handleUserInfo = () => {
         // console.log("=================================userinfo: ", userinfo)
        setMyInfo(!myInfo);
