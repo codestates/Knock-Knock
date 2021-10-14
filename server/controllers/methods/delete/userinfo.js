@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
   jwt.verify(authorization,process.env.ACCESS_SECRET , async function(err,decoded){
     if(err) {
-      res.send("만료됬거나 유효하지 않은 토큰 입니다")
+      res.status(401).json({ message:"not authorized"})
     } else {
       
       const tokenData = { 
@@ -23,15 +23,15 @@ module.exports = async (req, res) => {
       })
 
       if(!userData) {
-        res.send("잘못된 정보 토큰 입니다")
+        res.status(404).json({ message:"invalid user"})
       } else {
         
         db.user.destroy({
           where : { id: tokenData.id }
         })
 
-        res.json({
-          message: "회원탈퇴가 완료 되었습니다."
+        res.status(200).json({
+          message: "Membership withdrawal has been completed"
         })
       }
     }

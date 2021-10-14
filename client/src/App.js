@@ -33,7 +33,7 @@ function App() {
       "Content-Type" : "application/json"
     }
   }).then(res=>{
-      if(res.data.message === "회원탈퇴가 완료 되었습니다."){
+      if(res.data.message === "Membership withdrawal has been completed"){
           //토큰비우고 
           //로그인정보도비우고
           //alert

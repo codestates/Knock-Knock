@@ -36,7 +36,7 @@ export default function AddToilet({ openModalFunc3,accessToken }) {
             }).then((res)=>{
                    console.log(res)
              // settoiletinfo(toiletinfo)
-               if(res.data.message==='화장실 등록이 완료되었습니다'){
+               if(res.data.message==="Toilet information registration completed"){
                 alert(" 화장실 등록이 완료되었습니다")
                 window.location.replace('/')
                }
