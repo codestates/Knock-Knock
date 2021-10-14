@@ -10,8 +10,9 @@ import MyList from './pages/MyList'
 import Location from './component/location'
 import AddToilet from './pages/addToilet'
 import {BrowserRouter, Route, Switch, useHistory, Link} from "react-router-dom"
+import _ from 'lodash';
 // import * as React from 'react';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 //import {FaRestroom} from "react-icons/fa"
 
 axios.defaults.withCredentials = true;
@@ -20,9 +21,8 @@ function App() {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
-
   const [isMyList, setIsMyList] = useState(null);
-
+  const [myList, setMyList] = useState([]);
   const [accessToken, setAccessToken] = useState(null);
 
 
@@ -34,41 +34,32 @@ function App() {
   }
 
 
-
   const handleAccessToken = (accessT) => {
     console.log('accccccceessstyttttttttt',accessT)
     setAccessToken(accessT) // 로그인하면서 받은 엑세스 토큰
-
-
-
+  }
+  //console.log("==============================isMyList(latest)", isMyList)
+  
+  const handleWriteInfo = () => {
     
-
-  }
-  
-  const handleWriteInfo = (accessT) => {
-    axios.get("https://localhost:4000/user/mylist", {
-      headers: {
-        authorization: `${accessToken}`,
-        "Content-Type" : "application/json"
-      }
-    }) // myComment, myToilet 데이터 요청
-    .then((res) => {
-
-      console.log("===================mylist: ", res)
-
-      setIsMyList(res.data)
-
-      console.log("===============isMyList: ", isMyList)
-
-    })
-  }
-
+      axios.get("https://localhost:4000/user/mylist", {
+        headers: {
+          authorization: `${accessToken}`,
+          "Content-Type" : "application/json"
+        }
+      }) // myComment, myToilet 데이터 요청
+      //[{.....},{......}]
+      .then((res) => {
+        console.log("===================mylist: ", _.cloneDeep(res.data.myToilet))
+      
+        setMyList(myList=>[...myList,...res.data.myToilet])
+        console.log("===================mylist: ", myList)
+      })
+      console.log("===================mylist: ", myList)
+    }
+    
   const isAuthenticated = () => {
-  
-
-
     axios.get("https://localhost:4000/user/userinfo", {
-
       headers: {
         authorization: `${accessToken}`,
         "Content-Type" : "application/json"   
@@ -76,8 +67,6 @@ function App() {
       withCredentials: true
     })
     .then((res) => {
-  
-
       console.log('22222222222222',res)
        // 객체 키값이 없기에 그냥 바로 res 객체
       history.push('/')
@@ -85,11 +74,11 @@ function App() {
 
     })
   }
-  
 
   const handleLogout = () => {
     axios.post("https://localhost:4000/signout")
     .then((res) => {
+      console.log("===================mylist: ", myList)
       setIsLogin(false);
       setUserinfo(null);
       window.location.replace('/') 
@@ -134,7 +123,7 @@ function App() {
     <div className="headerdiv">
       <header className="header" >
       <Link to="/">
-        <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/XLgjjZ8/Knock-Knock-logo.png" alt="My Image"/></h1>
+        <h1 className="App-name" ><img className="Knock_logo1" src="https://i.ibb.co/PW20S0t/Knock-Knock-logo-removebg-preview.png" alt="My Image"/></h1>
         </Link>
       
 
@@ -166,14 +155,14 @@ function App() {
        <Location openModalFunc3={openModalFunc3}/>
      </Route> 
      <Route exact path='/mypage'  >
-       <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} />
+       <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} accessToken={accessToken} handleWriteInfo={handleWriteInfo} />
      </Route>
      <Route exact path='/mylist' >
-       <MyList accessToken={accessToken} />
+       <MyList accessToken={accessToken} handleWriteInfo={handleWriteInfo} myList={myList}/>
      </Route>
-     <Route path='/mylist'>
+     {/* <Route path='/mylist'>
        <MyList isMyList={isMyList} />
-     </Route>
+     </Route> */}
     </div>
     </Switch>
   </div>  
