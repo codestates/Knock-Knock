@@ -26,7 +26,30 @@ function App() {
   const [accessToken, setAccessToken] = useState(null);
 
 
-
+  const deleteAccount = ()=> {
+  axios.delete("https://localhost:4000/user/userinfo", {
+    headers: {
+      authorization: `${accessToken}`,
+      "Content-Type" : "application/json"
+    }
+  }).then(res=>{
+      if(res.data.message === "회원탈퇴가 완료 되었습니다."){
+          //토큰비우고 
+          //로그인정보도비우고
+          //alert
+          //window.push
+          setUserinfo(null)
+          setAccessToken(null)
+          setIsLogin(false)
+          setMyList([])
+          window.location.replace('/') 
+          alert("회원탈퇴되었습니다")
+      }
+      else{
+        alert("잘못된 접근입니다")
+      }
+  })
+  }
 
   const handleUserinfo = (accessP) =>{
     setUserinfo(accessP)
@@ -155,7 +178,7 @@ function App() {
        <Location openModalFunc3={openModalFunc3}/>
      </Route> 
      <Route exact path='/mypage'  >
-       <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} accessToken={accessToken} handleWriteInfo={handleWriteInfo} />
+       <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} accessToken={accessToken} handleWriteInfo={handleWriteInfo} deleteAccount={deleteAccount} />
      </Route>
      <Route exact path='/mylist' >
        <MyList accessToken={accessToken} handleWriteInfo={handleWriteInfo} myList={myList}/>
