@@ -10,7 +10,7 @@ function TabModal2( {handleLogout} ){
        
              showTabModal === false ?
             <div className='ModalContainer1' >
-            <div onClick={openModal}>menu</div> 
+            <img onClick={openModal} src='https://i.ibb.co/s1wfvjz/Kakao-Talk-Photo-2021-10-14-17-44-47.png'/>
             </div>
           : <div className='ModalContainer2'onClick={openModal}>
             <Link to="/mypage">
