@@ -1,22 +1,21 @@
 .App {
   display: flex;
   text-align: center;
+
   flex-direction: column;
   
+
 }
 .App-name{
   margin: 10px;
   width: 40%;
   float: center;;
-  
 }
-
 .menu{
   margin: 5%;
   pointer-events: none;
   float: right;
 }
-
 .App-logo2 {
   width: auto;
   height: auto;
@@ -35,8 +34,6 @@
   height: 50vh;
   z-index: 4;
 }
-
-
 .header {
  /* background-color: #282c34;*/
  background-image: linear-gradient(to top, rgba(128, 124, 124, 0.377) 0%, rgba(58, 54, 54, 0.116) 100%);
@@ -46,7 +43,10 @@
   align-items: center;
   justify-content: space-between;
 
+
 }
+
+
 
 .Knock_logo1 {
   width: auto;

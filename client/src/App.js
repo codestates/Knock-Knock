@@ -94,7 +94,6 @@ function App() {
        // 객체 키값이 없기에 그냥 바로 res 객체
       history.push('/')
       console.log("========================useinfostates: ", userinfo)
-
     })
   }
 
@@ -175,7 +174,7 @@ function App() {
      {/* <SignUp/>  */}
      {/* {<Location/>} */}
      <Route exact path='/'  >
-       <Location openModalFunc3={openModalFunc3}/>
+       <Location openModalFunc3={openModalFunc3} isLogin={isLogin}/>
      </Route> 
      <Route exact path='/mypage'  >
        <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} accessToken={accessToken} handleWriteInfo={handleWriteInfo} deleteAccount={deleteAccount} />
