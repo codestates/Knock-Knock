@@ -174,7 +174,7 @@ function App() {
      {/* <SignUp/>  */}
      {/* {<Location/>} */}
      <Route exact path='/'  >
-       <Location openModalFunc3={openModalFunc3}/>
+       <Location openModalFunc3={openModalFunc3} isLogin={isLogin}/>
      </Route> 
      <Route exact path='/mypage'  >
        <MyPage handleLogout={handleLogout} userinfo={userinfo} handleWriteInfo={handleWriteInfo} accessToken={accessToken} handleWriteInfo={handleWriteInfo} deleteAccount={deleteAccount} />

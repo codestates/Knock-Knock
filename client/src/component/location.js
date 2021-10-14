@@ -19,7 +19,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './location.css'
 import { Link } from "react-router-dom";
-const Location=({openModalFunc3})=>{
+const Location=({isLogin,openModalFunc3})=>{
     const [searchAdress, setsearchAdress] = useState({
         adress : ''
     })
@@ -306,11 +306,13 @@ const Location=({openModalFunc3})=>{
             <div className='searchBox'>
              <input className='search' onChange={handleSearchValue('adress')} onKeyUp={handleKeyUp}></input>
              <button onClick={searchClick}>검색</button>
+             {isLogin? 
              <div>
              
              <button onClick={openModalFunc3}>화장실 추가하기</button> 
              
-             </div>
+             </div>:
+              null}
              </div>
              <div className='backCurLoc'>
              <button onClick={resetSearch}>현재위치</button>    
