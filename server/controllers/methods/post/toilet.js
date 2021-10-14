@@ -49,11 +49,11 @@ module.exports = async (req, res) => {
           .then(function (response) { 
             //에러처리(카카오에서 보내주는 데이터에 문제 있을경우)
             if(!response.body.documents){
-              res.status(404).send("This is an invalid address. Please check again")
+              res.status(404).json({ message: "This is an invalid address. Please check again" })
             }
             //에러처리(잘못된 주소일 경우)
             else if(!response.body.documents[0]) {
-              res.status(404).send("This is an invalid address. Please check again")
+              res.status(404).json({ message: "This is an invalid address. Please check again" })
             }
             else {
               //좌표 데이터 가져오기
@@ -85,7 +85,7 @@ module.exports = async (req, res) => {
               })
               .then(([data, created]) => {
                 if(!created) {
-                  res.status(409).send("This address already exists")
+                  res.status(409).json( { message: "This address already exists"} )
                 }else{
                   const payload = {
                     name: data.dataValues.name,
