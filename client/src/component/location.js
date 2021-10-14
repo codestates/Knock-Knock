@@ -80,6 +80,9 @@ const Location=({openModalFunc3})=>{
                   for(let i = 0 ; i < res.data.length; i++){
                     // accessible_toilet_female: false
                     // accessible_toilet_male: false
+                    let imageSrc = 'https://i.ibb.co/HGPJwqQ/Kakao-Talk-Photo-2021-10-14-14-05-31.png'
+                    let toImageSize = new kakao.maps.Size(30, 40)
+                    let markerImage = new kakao.maps.MarkerImage(imageSrc, toImageSize)
                       if(res.data[i].accessible_toilet_male===true || res.data[i].accessible_toilet_female === true){
                           console.log('장장애인화장실표시가있을까요?애',res.data[i])
                         var toMarkerPosition  = new kakao.maps.LatLng(res.data[i].locationY, res.data[i].locationX)
@@ -87,7 +90,8 @@ const Location=({openModalFunc3})=>{
                         var toMarker = new kakao.maps.Marker({
                         map: map,
                         position: toMarkerPosition,
-                        title:res.data[i].name
+                        title:res.data[i].name,
+                        image: markerImage
                     });
             
                     // 마커가 지도 위에 표시되도록 설정합니다
@@ -243,8 +247,8 @@ const Location=({openModalFunc3})=>{
     
     // 지도에 마커와 인포윈도우를 표시하는 함수입니다
     function displayMarker(locPosition, message) {
-        let imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-        imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+        let imageSrc = 'https://i.ibb.co/hHP5tF2/Kakao-Talk-Photo-2021-10-14-14-51-13.png', // 마커이미지의 주소입니다    
+        imageSize = new kakao.maps.Size(56, 65), // 마커이미지의 크기입니다
         imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
           
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다

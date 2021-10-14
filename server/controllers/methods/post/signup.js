@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const { name, email, password } = req.body;
 
   if(!name || !email || !password ) {
-    res.status(422).send("insufficient parameters supplied")
+    res.status(422).json({ message:"insufficient parameters supplied"} )
   }else {
     await db.user.findOrCreate({
       where: {
@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
     })
     .then(([data, created]) => {
       if(!created) {
-        res.status(409).send("This email already exists")
+        res.status(409).json({ message: "This email already exists"})
       }else{
         const payload = {
           id: data.dataValues.id,
