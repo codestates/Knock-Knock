@@ -1,7 +1,5 @@
 # Knock-Knock
 
-<a href="https://ibb.co/n7wYzSx"><img src="https://i.ibb.co/n7wYzSx/Knock-Knock-logo.png" alt="Knock-Knock-logo" border="0"></a>
-
 거리에서 급하게 화장실을 찾아야할때, 
 공중화장실이 어딨는지 혹은 빌딩 주택가에서 화장실을 찾지 못해 식은땀 흘린적 있으신적 다들 있으시죠?
 
